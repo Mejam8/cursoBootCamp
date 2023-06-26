@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'peliculas/style.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <h1 style="width: 340px; text-align: center;">{% block header-title %}Directores{% endblock %}</h1>
+    </header>
+    {% for director in directores %}
+    <h2 style="width: 250px; text-align: end;">{{ director.nombre }} {{ director.apellidos }}</h2>
+    <ul>
+        {% for pelicula in director.peliculas.all %}
+        <li style="width: 250px; text-align: center;"> <strong>{{ pelicula.nombre }}</strong></li>
+        <div style="margin: 20px; width: 250px; text-align: justify">{{ pelicula.resumen}}</div>
+        {% endfor %}
+    </ul>
+    <div style="border-top: 3px solid black; width: 320px"></div>
+    {% endfor %}
+    <main>{% block content %}{% endblock %}</main>
+</body>
+</html>
